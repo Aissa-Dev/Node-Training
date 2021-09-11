@@ -1,10 +1,21 @@
-const EventEmitter = require('events');
+const http = require('http');
 
-myEvent = new EventEmitter();
+const server = http.createServer((req, res) => {
+    if(req.url === '/') {
+        res.write('welcome to the home page');
+    }
+    else if (req.url == '/course'){
+        res.write(JSON.stringify(['Node', 'React', 'Bootstrap']));
+    } else {
+        res.write('page not found');
+    }
+    res.end();
+});
 
-myEvent.on('hello', (arg) => {
-    console.log('hello ' + arg.name + ' your phone is ' + arg.num)
-})
+server.on('connection', () => {
+    console.log('New Connection')
+});
 
-myEvent.emit('hello', { num: 123322122, name: 'dev dev'});
+server.listen(4000);
 
+console.log('Listening on port 4000')
