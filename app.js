@@ -1,21 +1,25 @@
-const http = require('http');
 
-const server = http.createServer((req, res) => {
-    if(req.url === '/') {
-        res.write('welcome to the home page');
-    }
-    else if (req.url == '/course'){
-        res.write(JSON.stringify(['Node', 'React', 'Bootstrap']));
-    } else {
-        res.write('page not found');
-    }
+const express = require('express');
+
+const app = express();
+
+app.listen(3000, () => {console.log('Listening the port 3000')});
+
+app.get('/', (req, res)=> {
+    console.log('req : ' + req );
+    res.write('response ');
     res.end();
 });
 
-server.on('connection', () => {
-    console.log('New Connection')
+app.get('/courses', (req, res)=> {
+    console.log('req : ' + req );
+    res.send(JSON.stringify(['Angular', 'React', 'Vue']));
+    res.end();
 });
 
-server.listen(4000);
-
-console.log('Listening on port 4000')
+app.get('/courses/:id/:year/:month', (req, res)=> {
+    console.log('req : ' + req );
+    //res.send(req.params.id + ' ' + req.params.year + ' ' + req.params.month);
+    res.send(req.query.orderBy);
+    res.end();
+});
