@@ -21,5 +21,11 @@ app.get('/courses/:id/:year/:month', (req, res)=> {
     console.log('req : ' + req );
     //res.send(req.params.id + ' ' + req.params.year + ' ' + req.params.month);
     res.send(req.query.orderBy);
+    //http://localhost:3000/courses/12/2009/12?orderBy=year
+    //req.params : id, year, month
+    //req.query : year
+    //req.params.id ---> 12
+    //req.query.orderBy ---> year
+
     res.end();
 });
