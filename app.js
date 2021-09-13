@@ -104,7 +104,4 @@ function validateCourse(course) {
         });
     
     return schema.validate(course)
-
 }
-
-
