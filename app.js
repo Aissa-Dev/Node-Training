@@ -42,13 +42,9 @@ app.get('/courses/:id', (req, res)=> {
 });
 
 app.post('/api/courses', (req, res) => {
-    const schema = Joi.object(
-        {
-            title : Joi.string().alphanum().min(3).max(10).required();
-        }
-    )
 
-    const { value, error } = schema.validate(req.body);
+
+    const { value, error } = validateCourse(req.body);
 
     if (error) {
         res.status(400).send(error.details[0].message)
@@ -63,3 +59,33 @@ app.post('/api/courses', (req, res) => {
 
     res.send(course);
 })
+
+app.put('/api/courses/:id', (req, res) => {
+
+    //verify if the course is alredy exist
+    let course = courses.find(course => course.id === parseInt(req.params.id));
+
+    if(!course) {
+        res.status(400).send('course not found !')
+    }
+
+    //Validate Course
+    const {error, value } = validateCourse(req.body);
+
+    if(error) {
+        res.status(400).send(error.details[0].message);
+    }
+
+    //Modify Course
+    course.title = value.title;
+});
+
+function validateCourse(course) {
+    const schema = Joi.object(
+        {
+            title : Joi.string().alphanum().min(3).max(10).required();
+        });
+    
+    return schema.validate(course)
+
+}
