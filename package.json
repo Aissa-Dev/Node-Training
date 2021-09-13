@@ -1,0 +1,28 @@
+{
+  "name": "node-training",
+  "version": "1.0.0",
+  "description": "Node trainig",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aissa-Dev/Node-Training.git"
+  },
+  "author": "Aissa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aissa-Dev/Node-Training/issues"
+  },
+  "homepage": "https://github.com/Aissa-Dev/Node-Training#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "joi": "^17.4.2",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.0.5"
+  },
+  "devDependencies": {
+    "jshint": "^2.13.1"
+  }
+}
