@@ -80,6 +80,23 @@ app.put('/api/courses/:id', (req, res) => {
     course.title = value.title;
 });
 
+app.delete('api/courses/:id', (req, res) => {
+
+    //verify if the course is alredy exist
+    let course = courses.find(course => course.id === parseInt(req.params.id));
+
+    if(!course) {
+        res.status(400).send('course not found !')
+    }
+
+    //Delete Course
+    const index = courses.indexOf(course);
+    courses.splice(index, 1);
+
+    //Send Response
+    res.status(204).send({})  // 204 for no content //par convention on utulise un objet vide
+});
+
 function validateCourse(course) {
     const schema = Joi.object(
         {
@@ -89,3 +106,5 @@ function validateCourse(course) {
     return schema.validate(course)
 
 }
+
+
